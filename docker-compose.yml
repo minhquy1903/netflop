@@ -1,20 +1,22 @@
-version: "3"
+version: "3.8"
 services:
   api:
+    container_name: api
     build:
       dockerfile: Dockerfile
       context: ./be
       # Only will build development stage from our dockerfile
-      target: development
+      # target: development
     env_file:
-      - .env
+      - ./be/.env
     command: npm run start:dev
     ports:
       - 3000:3000
 
   nginx:
+    container_name: nginx
     image: nginx
     ports:
       - 80:80
     volumes:
-      - ./nginx.conf:nnginx.conf:ro
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
