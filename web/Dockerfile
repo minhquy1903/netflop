@@ -3,7 +3,7 @@ RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
 RUN npm install -g pnpm
-COPY package.json package-lock.json ./
+COPY package.json pnpm-lock ./
 RUN  pnpm install --production
 
 FROM node:18-alpine AS builder
