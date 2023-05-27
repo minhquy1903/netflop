@@ -6,7 +6,7 @@ import {
   ConfigService as NestjsConfigService,
 } from '@nestjs/config';
 
-import { GetConfig } from './config';
+import { GetConfig } from './type';
 
 declare module '@nestjs/config' {
   function registerAs<

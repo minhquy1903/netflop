@@ -63,8 +63,8 @@ export class AuthService {
 
   async generateJwtAccessToken(payload: JWTPayload) {
     return this.jwtService.sign(payload, {
-      expiresIn: this.configService.get('jwt.accessExpires'),
       privateKey: this.configService.get('jwt.accessSecret'),
+      expiresIn: this.configService.get('jwt.accessExpires'),
     });
   }
 }
