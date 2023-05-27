@@ -10,18 +10,28 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Account {
+model User {
   id        String    @id @default(cuid())
   email     String
   password  String
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
+  Comment   Comment[]
+
+  @@map("users")
 }
 
 model Comment {
   id        String    @id @default(cuid())
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
+
+  userId  String
+  user    User   @relation(fields: [userId], references: [id])
+  movieId String
+  movie   Movie  @relation(fields: [movieId], references: [id])
+
+  @@map("comments")
 }
 
 model Movie {
@@ -37,6 +47,16 @@ model Movie {
   source      String
   createdAt   DateTime  @default(now())
   updatedAt   DateTime? @updatedAt
+
+  categoryId String
+  category   Category  @relation(fields: [categoryId], references: [id])
+  tagId      String
+  tag        Tag       @relation(fields: [tagId], references: [id])
+  genreId    String
+  genren     Genre     @relation(fields: [genreId], references: [id])
+  Comment    Comment[]
+
+  @@map("movie")
 }
 
 model Category {
@@ -44,6 +64,9 @@ model Category {
   name      String
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
+  Movie     Movie[]
+
+  @@map("categories")
 }
 
 model Tag {
@@ -51,11 +74,15 @@ model Tag {
   name      String
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
+  Movie     Movie[]
+
+  @@map("tags")
 }
 
-model Crew {
-  id        String    @id @default(cuid())
-  movieId   String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime? @updatedAt
+model Genre {
+  id    String  @id @default(cuid())
+  name  String
+  Movie Movie[]
+
+  @@map("genres")
 }
