@@ -29,11 +29,12 @@ services:
     ports:
       - 5432:5432
     restart: unless-stopped
+    command: ["postgres", "-c", "config_file=/etc/postgresql.conf"]
     env_file:
       - ./db/.env
     volumes:
       - pg_data:/var/lib/postgresql/data
-      - ./db/postgresql.conf:/var/lib/postgresql/data/postgresql.conf
+      - ./db/postgresql.conf:/etc/postgresql.conf
 
   nginx:
     container_name: reverse_proxy
