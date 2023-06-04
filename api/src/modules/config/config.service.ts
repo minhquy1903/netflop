@@ -19,18 +19,28 @@ declare module '@nestjs/config' {
   ): TFactory & ConfigFactoryKeyHost<ReturnType<TFactory>> & { name: Name };
 }
 
-export const appConfig = registerAs('app', () => ({
+const appConfig = registerAs('app', () => ({
   port: parseInt(process.env.PORT),
   apiPrefix: process.env.API_PREFIX,
 }));
 
-export const jwtConfig = registerAs('jwt', () => ({
+const jwtConfig = registerAs('jwt', () => ({
+  confirmSecret: process.env.JWT_CONFIRM_SECRET,
+  confirmExpires: process.env.JWT_CONFIRM_EXPIRES,
   accessSecret: process.env.JWT_ACCESS_SECRET,
   accessExpires: process.env.JWT_ACCESS_EXPIRES,
 }));
 
-export const appConfigs = [appConfig, jwtConfig];
+const emailConfig = registerAs('email', () => ({
+  host: process.env.EMAIL_HOST,
+  user: process.env.EMAIL_USER,
+  port: process.env.EMAIL_PORT,
+  password: process.env.EMAIL_PASSWORD,
+  from: process.env.EMAIL_FROM,
+}));
+
+export const appConfigs = [appConfig, jwtConfig, emailConfig];
 
 export class ConfigService extends NestjsConfigService<
-  GetConfig<[typeof appConfig, typeof jwtConfig]>
+  GetConfig<[typeof appConfig, typeof jwtConfig, typeof emailConfig]>
 > {}
