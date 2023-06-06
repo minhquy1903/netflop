@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { AuthModule } from './modules/auth/auth.module';
 import { appConfigs } from './modules/config/config.service';
 import { MailModule } from './modules/mail/mail.module';
+import { AppController } from 'src/app.controller';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { MailModule } from './modules/mail/mail.module';
       envFilePath: ['.env'],
     }),
   ],
+  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}

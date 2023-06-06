@@ -1,5 +1,5 @@
-import { Controller, Post, Body, UsePipes, Param } from '@nestjs/common';
-import { AuthService } from './auth.service';
+import { Controller, Post, Body, UsePipes } from '@nestjs/common';
+import { AuthService } from 'src/modules/auth/auth.service';
 import {
   ResendConfirmEmailDTO,
   UserLoginDTO,
