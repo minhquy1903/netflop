@@ -10,6 +10,6 @@ export class AppController {
     summary: 'Check health',
   })
   checkHealth() {
-    return 'Hello world 123';
+    return 'Hello, I good!';
   }
 }

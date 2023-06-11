@@ -2,20 +2,15 @@ version: "3.8"
 services:
   api:
     container_name: api
-    build:
-      dockerfile: Dockerfile
-      context: ./api
-      target: production
+    image: minkoy1903/netflop_api:latest
     env_file:
       - ./api/.env
     ports:
       - 3000:3000
 
   web:
+    image: minkoy1903/netflop_web:latest
     container_name: web
-    build:
-      context: ./web
-      target: runner
     ports:
       - "8000:8000"
     environment:
