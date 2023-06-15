@@ -10,6 +10,6 @@ export class AppController {
     summary: 'Check health',
   })
   checkHealth() {
-    return 'Hello, I good!';
+    return 'Hello, I good! test ci cd';
   }
 }
